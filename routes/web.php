@@ -23,4 +23,6 @@ Route::post('Doctor','DoctorController@store')->name('doctor.store');
 Route::get('Doctor/edit/{$id}','DoctorController@edit');
 Route::post('Doctor/{$id}','DoctorController@update');
 Route::get('Doctor/{$id}','DoctorController@delete');
-//////////// End Route Doctore
+//////////// End Route Doctore///////////////////////////////////
+
+

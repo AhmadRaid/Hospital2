@@ -21,6 +21,7 @@ class DoctorController extends Controller
 
     public function store(Request $request)
     {
+
         Doctor::create([
             'name'=> $request->name,
             'birthday'=> $request->bithday,
@@ -28,7 +29,9 @@ class DoctorController extends Controller
             'address'=> $request->address,
             'department_id'=> $request->department_id,
             'salary'=> $request->salary,
+            dsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaad
         ]);
+
     }
 
     public function update()
