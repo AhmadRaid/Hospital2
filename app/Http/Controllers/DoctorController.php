@@ -29,7 +29,7 @@ class DoctorController extends Controller
             'address'=> $request->address,
             'department_id'=> $request->department_id,
             'salary'=> $request->salary,
-
+            dsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaad
         ]);
 
     }
