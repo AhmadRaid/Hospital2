@@ -1,126 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">    <title>Document</title>
-</head>
-<body>
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-        >
-            <span class="navbar-toggler-icon"></span>
-        </button>
+@extends('layouts.main')
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#"
-                    >Home <span class="sr-only">(current)</span></a
-                    >
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#"
-                    >Add Department <span class="sr-only">(current)</span></a
-                    >
-                </li>
-            </ul>
+@section('content')
+
+    <!-- add doctor form -->
+    <div class="container">
+        <div class="add-doctor p-5 mt-4 mb-4 rounded text-white" style="background-color: #203647">
+            @if (Session::has('success'))
+            <div class="alert alert-success text-center" role="alert">
+                {{Session::get('success')}}
+            </div>
+            @endif
+            <form action="{{ route('doctor.store') }}" method="post">
+                @csrf
+                <div class="h3 mb-3" style="color: #ffc107">Add New Doctor</div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Full Name</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Full Name"
+                                name="name" />
+                            @error('name')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Birth Day</label>
+                            <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Birth Day"
+                                name="birthday" />
+                            @error('birthday')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Phone Number</label>
+                            <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Phone Number"
+                                name="phone" />
+                            @error('phone')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Address</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Address"
+                                name="address" />
+                            @error('address')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect2">Select Department</label>
+                            <select class="form-control" id="exampleFormControlSelect2" name="department_id">
+                                @foreach ($departments as $dep)
+                                    <option value="{{ $dep->id }}">{{ $dep->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('department_id')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Price</label>
+                            <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="salary"
+                                name="salary" />
+                            @error('salary')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn btn-outline-warning btn-lg fs-2 px-5">Add</button>
+                </div>
+            </form>
         </div>
     </div>
-</nav>
-
-<!-- add doctor form -->
-
-<div class="container">
-    <div class="add-doctor p-5 mt-4 mb-4 rounded" style="background-color: rgb(211, 212, 214);">
-        <form action="{{route('doctor.store')}}" method="post">
-            @csrf
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Full Name</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="Full Name"
-                    name="name"
-                />
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Birth Day</label>
-                <input
-                    type="date"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="Birth Day"
-                    name="bithday"
-                />
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Phone Number</label>
-                <input
-                    type="number"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="Phone Number"
-                    name="phone"
-                />
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Address</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="Address"
-                    name="address"
-                />
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect2"
-                >Example multiple select</label
-                >
-                <select
-                    class="form-control"
-                    id="exampleFormControlSelect2"
-                    name="department_id"
-                >
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Price</label>
-                <input
-                    type="number"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="name@example.com"
-                    name="salary"
-                />
-            </div>
-            <div class="form-group d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary btn-lg fs-2 px-5">Add</button>
-            </div>
-
-        </form>
-    </div>
-</div>
-
-<script src="js/jquery-3.5.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-</body>
-</html>
+@endsection

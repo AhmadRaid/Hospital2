@@ -19,7 +19,7 @@ class CreateDoctorsTable extends Migration
             $table->date('birthday');
             $table->string('phone');
             $table->text('address');
-            $table->integer('department_id');
+            $table->unsignedBigInteger('department_id');
             $table->float('salary');
             $table->timestamps();
         });
